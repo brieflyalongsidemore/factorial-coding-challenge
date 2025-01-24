@@ -80,7 +80,7 @@ export class ProductService {
     return db.select().from(products).where(eq(products.id, productId));
   }
 
-  public async getProductOptions(productId: string) {
+  public async getProductOptionsIds(productId: string) {
     const options = await db
       .select()
       .from(productPresets)

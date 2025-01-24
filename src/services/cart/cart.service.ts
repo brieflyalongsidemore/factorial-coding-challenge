@@ -7,15 +7,18 @@ import { partOptions } from "db/schema/partOptions";
 import { cart, cartOptions } from "db/schema/cart";
 import { PriceService } from "services/price/price.service";
 import { ProductService } from "services/product/product.service";
+import { RulesService } from "services/rules/rules.service";
 
 export class CartService {
   private priceService = new PriceService();
   private productService = new ProductService();
+  private rulesService = new RulesService();
 
   private async checkIfOptionsValid(options: string[]) {
     const isValid = await db.select().from(partOptions).where(inArray(partOptions.id, options));
     return !!isValid.length;
   }
+
   private async checkIfProductExists(productId: string) {
     const isValid = await db.select().from(products).where(eq(products.id, productId));
     return !!isValid.length;
@@ -27,11 +30,18 @@ export class CartService {
     if (!isProductValid) throw new Error("invalid-productId");
 
     const options =
-      payload.options || (await this.productService.getProductOptions(payload.productId));
+      payload.options || (await this.productService.getProductOptionsIds(payload.productId));
 
     const isCartOptionsValid = await this.checkIfOptionsValid(options);
 
     if (!isCartOptionsValid) throw new Error("invalid-options");
+
+    const violations = await this.rulesService.validateCartOptionsRules(options);
+
+    if (violations.length)
+      throw new Error(
+        JSON.stringify({ code: "rules-violations", data: JSON.stringify(violations) })
+      );
 
     const [cartInitialData] = await db
       .insert(cart)
