@@ -120,13 +120,13 @@ Once the user accesses a specific product, a request is made to retrieve all the
 
 The options will be grouped under relevant categories. For example, if the product is a bike, the categories could include parts like Wheels, Frame, Rim Color, and Chain. When the user selects a category, a request is sent to the backend with the user's currently selected options. The response will include the options for the selected part, along with a field called `disabled`. This field indicates if the current user's selection violates any rules towards the option.
 
-These rules are defined in the **rules** table, where admins can specify a set of rules for each option. (#admin-flow-section-rules)
+These rules are defined in the **rules** table, where admins can specify a set of rules for each option. [See Admin Option Rules](#admin-option-rules)
 
 If an option is disabled due to a conflicting selection, a UI alert will notify the user, explaining the reason the option is disabled and providing an action to edit the option causing the conflict.
 
 The price of each option will also adjust based on the user's selections. If an option has a combination with a previously selected option, the price may be affected. A tooltip will appear on the option card, allowing the user to hover over it and understand why the price has changed.
 
-After the user makes a new selection, a request is sent to the back-end to calculate the total price based on the selected options, factoring in any price differences from the price combination table. (See Price Combinations)
+After the user makes a new selection, a request is sent to the back-end to calculate the total price based on the selected options, factoring in any price differences from the price combination table. [See Admin Price Combinations](#admin-price-combinations)
 
 ![2](./assets/2.png)
 
@@ -142,7 +142,7 @@ Once validated, the backend will add a row to the **cart** table, linking the pr
 
 Once Marcus accesses the administration portal, he'll be greeted by a dashboard displaying key metrics like sales performance. A navigation bar will be available, allowing him to easily access the pages where he can manage products, categories, and options.
 
-![3](./assets/5.png)
+![3](./assets/3.png)
 
 ### Product Creation
 
@@ -150,7 +150,7 @@ Upon navigating to the products page, Marcus will see a list of existing product
 
 Creating a new product will add a row to the `products` table with the details entered in the modal, along with a foreign key linking the product to its corresponding category.
 
-![[Pasted image 20250126204231.png]]
+![3](./assets/5.png)
 Once the form is submitted, Marcus will be redirected to a page to finalize the product setup. This page is divided into several sections:
 
 1. **General Details**: This section displays the previously entered information (name, category, images).
@@ -159,7 +159,7 @@ Once the form is submitted, Marcus will be redirected to a page to finalize the 
 
 Upon selecting an option, a new row will be added to the `presets` table, including a foreign key referencing the selected option and another foreign key for the associated product ID.
 
-![3](./assets/6.png)
+![3](./assets/7.png)
 
 ---
 
@@ -175,6 +175,8 @@ After submitting, Marcus will be redirected to the options page, which follows a
 Creating an option will add a new row to the `part_options` table with the option details, as well as a foreign key that links it to the corresponding part.
 
 ---
+
+<a id="admin-option-rules"></a>
 
 ### Rules
 
@@ -202,6 +204,8 @@ Creating a rule will add a new row to the `rules` table with the following field
 ![3](./assets/7.png)
 
 ---
+
+<a id="admin-price-combinations"></a>
 
 ### Price Adjustments
 
