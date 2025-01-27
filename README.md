@@ -159,8 +159,6 @@ Once the form is submitted, Marcus will be redirected to a page to finalize the 
 
 Upon selecting an option, a new row will be added to the `presets` table, including a foreign key referencing the selected option and another foreign key for the associated product ID.
 
-![3](./assets/7.png)
-
 ---
 
 ### Options Creation
