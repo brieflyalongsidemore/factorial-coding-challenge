@@ -150,7 +150,7 @@ Upon navigating to the products page, Marcus will see a list of existing product
 
 Creating a new product will add a row to the `products` table with the details entered in the modal, along with a foreign key linking the product to its corresponding category.
 
-![3](./assets/5.png)
+![3](./assets/6.png)
 Once the form is submitted, Marcus will be redirected to a page to finalize the product setup. This page is divided into several sections:
 
 1. **General Details**: This section displays the previously entered information (name, category, images).
