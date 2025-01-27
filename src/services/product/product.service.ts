@@ -96,6 +96,7 @@ export class ProductService {
     const productOptions = await db
       .select({
         id: products.id,
+        name: products.name,
         presetId: productPresets.id,
         categoryId: products.categoryId,
         partId: productPresets.partId,
